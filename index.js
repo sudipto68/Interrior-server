@@ -37,6 +37,13 @@ client.connect((err) => {
     });
   });
 
+   app.get("/bookList/:email", (req, res) => {
+    const email = req.params.email;
+    bookingCollection.find({ email: email }).toArray((err, documents) => {
+      res.send(documents);
+    });
+  });
+
   app.post("/addReview", (req, res) => {
     const review = req.body;
     reviewCollection.insertOne(review).then((result) => {
